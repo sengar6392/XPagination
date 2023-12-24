@@ -16,11 +16,11 @@ function App() {
       SetPage((page) => page - 1);
     }
   };
-  const pagination=()=>{
-    const start=(page-1)*10
-    const end=page*10
-    return data.slice(start,end)
-  }
+  const pagination = () => {
+    const start = (page - 1) * 10;
+    const end = page * 10;
+    return data.slice(start, end);
+  };
 
   const fetchData = async () => {
     try {
@@ -29,34 +29,34 @@ function App() {
       );
       setData(res.data);
     } catch (error) {
-      console.log(error);
+      alert("failed to fetch data");
     }
   };
   useEffect(() => {
     fetchData();
   }, []);
-  // useEffect(()=>{
 
-  // },[page])
-  const filteredData=pagination()
+  const filteredData = pagination();
   return (
     <>
       <h1 style={{ textAlign: "center" }}>Employee Data Table</h1>
-      <table style={{ textAlign: "left"}}>
+      <table style={{ textAlign: "left" }}>
         <tr>
           <th>ID</th>
           <th>Name</th>
           <th>Email</th>
           <th>Role</th>
         </tr>
-        {filteredData.map((item) => (
-          <tr key={item.id}>
-            <td>{item.id}</td>
-            <td>{item.name}</td>
-            <td>{item.email}</td>
-            <td>{item.role}</td>
-          </tr>
-        ))}
+        <tbody>
+          {filteredData.map((item) => (
+            <tr key={item.id}>
+              <td>{item.id}</td>
+              <td>{item.name}</td>
+              <td>{item.email}</td>
+              <td>{item.role}</td>
+            </tr>
+          ))}
+        </tbody>
       </table>
       <div
         style={{
